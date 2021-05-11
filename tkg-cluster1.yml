@@ -1,0 +1,23 @@
+apiVersion: run.tanzu.vmware.com/v1alpha1      
+kind: TanzuKubernetesCluster      
+metadata:
+  name: tkgs-demo-1
+  namespace: ns1
+spec:
+  distribution:
+    version: v1.20.2
+  settings:
+    network:
+      pods:
+        cidrBlocks: ["172.20.128.0/17"]
+    storage:
+      defaultClass: tkgs-storage-policy
+  topology:
+    controlPlane:
+      count: 1
+      class: best-effort-large
+      storageClass: tkgs-storage-policy
+    workers:
+      count: 3
+      class: best-effort-medium
+      storageClass: tkgs-storage-policy
